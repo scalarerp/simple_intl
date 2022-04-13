@@ -18,7 +18,7 @@ const App = () => {
     return (
         <div className="mt-10 mx-auto max-w-3xl">
             <h1 className="font-bold text-5xl mb-5 border-b-2 border-gray-800">
-                Teste Locale
+                Teste Locale ij kj kj kj
             </h1>
 
             <h4>
