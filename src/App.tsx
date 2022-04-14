@@ -17,20 +17,28 @@ const App = () => {
 
     return (
         <div className="mt-10 mx-auto max-w-3xl">
-            <h1 className="font-bold text-5xl mb-5 border-b-2 border-gray-800">
+            <h1 className="font-bold text-5xl mb-5 ">
                 Simple Locale without dependencies
             </h1>
+            <h4>
+                <a
+                    className="text-1xl p-2 bg-blue-500 mb-5"
+                    href="https://github.com/scalarerp/simple_intl"
+                >
+                    Link Repo GitHub
+                </a>
+            </h4>
 
             {locales.map(({ locale, name, icon }) => (
                 <button
                     key={locale}
-                    className="p-3 m-3 bg-blue-500"
+                    className="p-3 m-3 "
                     onClick={async () => {
                         await handleChangeLocaleAsync(locale)
                     }}
                 >
                     {icon}
-                    {'-'} {name}
+                    {name}
                 </button>
             ))}
 
