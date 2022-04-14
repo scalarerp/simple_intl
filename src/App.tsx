@@ -3,74 +3,65 @@ import { useSnapshot } from 'valtio'
 
 import { store, handleChangeLocaleAsync } from './store'
 import getUserLocale from './localesResources/getUserLocale'
+import { locales } from './localesResources'
 
 const App = () => {
     const browserLocale = getUserLocale()
-    const { messages, tLang } = useSnapshot(store)
+    const { tLang } = useSnapshot(store)
 
     useEffect(() => {
-        if (typeof messages === 'function') {
+        if (typeof tLang === 'function') {
             handleChangeLocaleAsync(browserLocale)
-            // console.log('on init browserLocale: ', browserLocale)
         }
     }, [])
 
     return (
         <div className="mt-10 mx-auto max-w-3xl">
             <h1 className="font-bold text-5xl mb-5 border-b-2 border-gray-800">
-                Teste Locale ij kj kj kj
+                Simple Locale without dependencies
             </h1>
 
-            <h4>
+            {locales.map(({ locale, name, icon }) => (
                 <button
+                    key={locale}
                     className="p-3 m-3 bg-blue-500"
                     onClick={async () => {
-                        await handleChangeLocaleAsync('pt-BR')
+                        await handleChangeLocaleAsync(locale)
                     }}
                 >
-                    pt-BR
+                    {icon}
+                    {'-'} {name}
                 </button>
-                <button
-                    className="p-3 m-3 bg-blue-500"
-                    onClick={async () => {
-                        await handleChangeLocaleAsync('es-ES')
-                    }}
-                >
-                    es-ES
-                </button>
-                <button
-                    className="p-3 m-3 bg-blue-500"
-                    onClick={async () => {
-                        await handleChangeLocaleAsync('en-US')
-                    }}
-                >
-                    en-US
-                </button>
-            </h4>
+            ))}
 
-            <h2>
-                <p>
-                    about.license.title
-                    <span className="font-bold text-red-900">
-                        {' '}
-                        {tLang.ABOUT_LICENSE_TITLE}
-                    </span>
-                </p>
-                <p>
-                    about.title
-                    <span className="font-bold text-red-900">
-                        {' '}
-                        {tLang.ABOUT_TITLE}
-                    </span>
-                </p>
-                <p>
-                    about.version
-                    <span className="font-bold text-red-900">
-                        {' '}
-                        {tLang.ABOUT_VERSION}
-                    </span>
-                </p>
-            </h2>
+            <h1 className="pt-16 pb-4 text-3xl">With Object Entries</h1>
+            {Object.entries(tLang).map(([key, value]) => {
+                return (
+                    <div>
+                        {key} : {value}
+                    </div>
+                )
+            })}
+
+            <h1 className="pt-16 pb-4 text-3xl">One by one </h1>
+            <p>
+                about.license.title
+                <span className="ml-3 font-bold text-red-900">
+                    {tLang.ABOUT_LICENSE_TITLE}
+                </span>
+            </p>
+            <p>
+                about.title
+                <span className="ml-3 font-bold text-red-900">
+                    {tLang.ABOUT_TITLE}
+                </span>
+            </p>
+            <p>
+                about.version
+                <span className="ml-3 font-bold text-red-900">
+                    {tLang.ABOUT_VERSION}
+                </span>
+            </p>
 
             {/* {messages && <pre>{JSON.stringify(messages, null, 2)}</pre>} */}
         </div>
