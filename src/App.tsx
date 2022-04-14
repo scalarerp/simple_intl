@@ -10,24 +10,23 @@ const App = () => {
     const { tLang } = useSnapshot(store)
 
     useEffect(() => {
-        if (typeof tLang === 'function') {
+        if (!tLang[0]) {
             handleChangeLocaleAsync(browserLocale)
         }
     }, [])
 
     return (
         <div className="mt-10 mx-auto max-w-3xl">
-            <h1 className="font-bold text-5xl mb-5 ">
-                Simple Locale without dependencies
-            </h1>
-            <h4>
+            <h1 className="font-bold text-5xl mb-5 ">Simple Locale</h1>
+            <div className="mb-8  text-2xl">
+                without dependencies
                 <a
-                    className="text-1xl p-2 bg-blue-500 mb-5"
+                    className="text-1xl p-2 ml-16 bg-blue-500 mb-5"
                     href="https://github.com/scalarerp/simple_intl"
                 >
                     Link Repo GitHub
                 </a>
-            </h4>
+            </div>
 
             {locales.map(({ locale, name, icon }) => (
                 <button
@@ -45,7 +44,7 @@ const App = () => {
             <h1 className="pt-16 pb-4 text-3xl">With Object Entries</h1>
             {Object.entries(tLang).map(([key, value]) => {
                 return (
-                    <div>
+                    <div key={key}>
                         {key} : {value}
                     </div>
                 )

@@ -1,12 +1,9 @@
-import { getLocaleJSONasync } from './localesResources/util'
+import { emptyMessages } from './localesResources/index'
 import { proxy } from 'valtio'
 import { devtools } from 'valtio/utils'
 import { LocaleMessages } from './localesResources/localeMessages'
 
 export const initialLocale = 'pt-BR'
-
-export const initialMessages = async () =>
-    await getLocaleJSONasync(initialLocale)
 
 interface ApplicationState {
     locale?: string
@@ -15,12 +12,20 @@ interface ApplicationState {
 
 export const store = proxy<ApplicationState>({
     locale: initialLocale,
-    tLang: initialMessages,
+    tLang: emptyMessages,
 })
 const unsub = devtools(store, 'simpleIntl')
 
 export const handleChangeLocaleAsync = async (newLocale: string) => {
     store.tLang = await getLocaleJSONasync(newLocale)
-    // console.log('handleChangeLocale: ', newLocale, 'messages: ', store.messages)
     store.locale = newLocale
+}
+
+const getLocaleJSONasync = async (newLocale: string) => {
+    const result = new Promise<LocaleMessages>((res) => {
+        import(`./localesResources/locales/${newLocale}.json`).then((data) => {
+            res(data?.default)
+        })
+    })
+    return result
 }

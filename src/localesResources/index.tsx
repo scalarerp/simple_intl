@@ -2,7 +2,7 @@ import { LocaleMessages } from './localeMessages.d'
 
 //only to check with typescript
 //this locks the build
-export const mustHaveTranslation: LocaleMessages = {
+export const emptyMessages: LocaleMessages = {
     ABOUT_LICENSE_TITLE: '',
     ABOUT_TITLE: '',
     ABOUT_VERSION: '',
