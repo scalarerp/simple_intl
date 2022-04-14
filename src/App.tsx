@@ -10,7 +10,7 @@ const App = () => {
     const { tLang } = useSnapshot(store)
 
     useEffect(() => {
-        if (!tLang[0]) {
+        if (tLang.ABOUT_LICENSE_TITLE === '') {
             handleChangeLocaleAsync(browserLocale)
         }
     }, [])
