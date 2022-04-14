@@ -1,3 +1,7 @@
 # Simple Intl
 
-Implementação de internacionalização
+Simple internacionalization with :
+React 18
+Vite
+Tailwind
+Typescript
