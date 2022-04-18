@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,mdx}\"",
-    "clean": "rm -fr node_modules || true"
+    "clean": "rm -fr node_modules || true",
+    "buildLocales": "node ./src/localesResources/buildLocales.js"
   },
   "dependencies": {
     "lodash": "^4.17.21",

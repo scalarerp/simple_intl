@@ -3,7 +3,7 @@ import { useSnapshot } from 'valtio'
 
 import { store, handleChangeLocaleAsync } from './store'
 import getUserLocale from './localesResources/getUserLocale'
-import { locales } from './localesResources'
+import { locales } from './localesResources/locales'
 
 const App = () => {
     const browserLocale = getUserLocale()
